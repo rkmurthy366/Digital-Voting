@@ -1,0 +1,33 @@
+NOT using pages
+dashboard.ejs
+voting.html
+
+
+Contract edit
+
+
+Errors in frontend
+refresh page when state is changed
+disable buttons when not in use
+stop showing content when not in use
+
+ADMIN
+** Candidate details -> stop showing votes
+** add Candidate -> disable button in different phase
+** Register -> 
+disable button in different phase
+go for a script registration which registers all users in one click
+** change phase -> disable button when not able to change phase
+** Logout -> no changes
+
+USER
+** Information -> no change
+** Voter Registration -> disable register button in different phase
+** Voting Area -> lot many changes
+** Result -> 
+** Logout -> no changes
+
+
+
+
+
