@@ -1,5 +1,5 @@
 demo = {
-  initDocumentationCharts: function() {
+  initDocumentationCharts: function () {
     if ($('#dailySalesChart').length != 0 && $('#websiteViewsChart').length != 0) {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
@@ -30,7 +30,7 @@ demo = {
     }
   },
 
-  initDashboardPageCharts: function() {
+  initDashboardPageCharts: function () {
 
     if ($('#dailySalesChart').length != 0 || $('#completedTasksChart').length != 0 || $('#websiteViewsChart').length != 0) {
       /* ----------==========     Daily Sales Chart initialization    ==========---------- */
@@ -117,7 +117,7 @@ demo = {
         ['screen and (max-width: 640px)', {
           seriesBarDistance: 5,
           axisX: {
-            labelInterpolationFnc: function(value) {
+            labelInterpolationFnc: function (value) {
               return value[0];
             }
           }
@@ -130,7 +130,7 @@ demo = {
     }
   },
 
-  initGoogleMaps: function() {
+  initGoogleMaps: function () {
     var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
     var mapOptions = {
       zoom: 13,

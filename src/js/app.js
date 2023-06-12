@@ -1,5 +1,3 @@
-var phaseEnum; // for changing phases of voting
-
 App = {
   web3Provider: null,
   contracts: {},
@@ -10,23 +8,6 @@ App = {
   },
 
   initWeb3: async function () {
-    /* 
-    if (window.ethereum) {
-      try {
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-        });
-        setAccounts(accounts);
-      } catch (error) {
-        if (error.code === 4001) {
-          // User rejected request
-        }
-      }
-    }
-
-    return App.initContract();
-  */
-
     // Modern dapp browsers...
     if (window.ethereum) {
       App.web3Provider = window.ethereum;
@@ -58,7 +39,6 @@ App = {
       var contest = data;
       App.contracts.Contest = TruffleContract(contest);
       App.contracts.Contest.setProvider(web3.currentProvider);
-      // App.contracts.Contest.setProvider(App.web3Provider);
       return App.render();
     });
   },
@@ -70,101 +50,101 @@ App = {
     loader.show();
     content.hide();
     $("#after").hide();
+    $("#adminControl").hide();
 
+    const ADMIN = "0x9b7c34650c1a8d805bde32fc0496b3f39253fbce";
     web3.eth.getCoinbase(function (err, account) {
       if (err === null) {
         App.account = account;
-        $("#accountAddress").html("Your account: " + account);
+        $("#accountAddress").html(`Your account: ${account}`);
+        if (App.account != ADMIN) {
+          $("#adminControl").show();
+          $("#addCandiBtn").prop("disabled", true);
+          $("#voterRegBtn").prop("disabled", true);
+          $("#changePhaseBtn").prop("disabled", true);
+        }
       }
     });
 
     // ------------- fetching candidates to front end from blockchain code-------------
+    var contestantsPromises = [];
     App.contracts.Contest.deployed()
       .then(function (instance) {
         contestInstance = instance;
         return contestInstance.contestantsCount();
       })
       .then(function (contestantsCount) {
-        var contestantsResults = $("#test");
+        var contestantsResults = $("#votingCenter");
         contestantsResults.empty();
         var contestantsResultsAdmin = $("#contestantsResultsAdmin");
         contestantsResultsAdmin.empty();
-        var contestantSelect = $("#contestantSelect");
-        contestantSelect.empty();
-
+        
         for (var i = 1; i <= contestantsCount; i++) {
-          contestInstance.contestants(i).then(function (contestant) {
+          var promise = contestInstance.contestants(i).then(function (contestant) {
             var id = contestant[0];
             var name = contestant[1];
             var voteCount = contestant[2];
             var fetchedParty = contestant[3];
             var fetchedAge = contestant[4];
             var fetchedQualification = contestant[5];
-
-            var contestantTemplate =
-              "<div class='card' style='width: 15rem; margin: 1rem;'><img class='card-img-top'src='../img/Sample_User_Icon.png' alt=''><div class='card-body text-center'><h4 class='card-title'>" +
-              name +
-              "</h4>" +
-              "<button type='button' class='btn btn-info' data-toggle='modal' data-target='#modal" +
-              id +
-              "'>Click Here to Vote</button>" +
-              "<div class='modal fade' id='modal" +
-              id +
-              "' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>" +
-              "<div class='modal-dialog modal-dialog-centered' role='document'>" +
-              "<div class='modal-content'>" +
-              "<div class='modal-header'>" +
-              "<h5 class='modal-title' id='exampleModalLongTitle'> <b>" +
-              name +
-              "</b></h5>" +
-              "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" +
-              "</div>" +
-              "<div class='modal-body'> <b> Party : " +
-              fetchedParty +
-              "<br>Age : " +
-              fetchedAge +
-              "<br>Qualification : " +
-              fetchedQualification +
-              "<br></b></div>" +
-              "<div class='modal-footer'>" +
-              "<button class='btn btn-info' onClick='App.castVote(" +
-              id.toString() +
-              ")'>VOTE</button>" +
-              "<button type='button' class='btn btn-info' data-dismiss='modal'>Close</button></div>" +
-              "</div></div></div>" +
-              "</div></div>";
+            
+            var contestantTemplate =`
+              <tr>
+                <th>${id}</th>
+                <td>${fetchedParty}</td>
+                <td>${name}</td>
+                <td>${fetchedAge}</td>
+                <td><button id="voteBtn-${id}" style="margin:0; padding:9px 40px" class="btn btn-success" onClick="App.castVote(${id.toString()})">VOTE</button></td>
+              </tr> 
+            `;
             contestantsResults.append(contestantTemplate);
 
-            var contestantOption =
-              "<option style='padding: auto;' value='" +
-              id +
-              "'>" +
-              name +
-              "</option>";
-            contestantSelect.append(contestantOption);
-
-            var contestantTemplateAdmin =
-              "<tr><th>" +
-              id +
-              "</th><td>" +
-              name +
-              "</td><td>" +
-              fetchedAge +
-              "</td><td>" +
-              fetchedParty +
-              "</td><td>" +
-              fetchedQualification +
-              "</td><td>" +
-              voteCount +
-              "</td></tr>";
+            var contestantTemplateAdmin = `
+              <tr>
+                <th>${id}</th>
+                <td>${name}</td>
+                <td>${fetchedAge}</td>
+                <td>${fetchedParty}</td>
+                <td>${fetchedQualification}</td>
+              </tr> 
+            `;
             contestantsResultsAdmin.append(contestantTemplateAdmin);
           });
+          contestantsPromises.push(promise);
         }
         loader.hide();
         content.show();
       })
       .catch(function (error) {
         console.warn(error);
+      });
+
+    // ------------- fetching if user voted or not, if voted to whom? -------------
+    App.contracts.Contest.deployed()
+      .then(function (instance) {
+        contestInstance = instance;
+        return contestInstance.voters(App.account);
+      })
+      .then(function (voter) {
+        var contestentId = voter[2];
+        console.log(contestentId)
+        if(!contestentId){
+          // user dint vote
+          var text = `User dint vote yet`;
+          $("#userVoted").html(text);
+        } else {
+          // user voted to getContestentVoted
+          contestInstance.contestants(contestentId).then(function (contestant) {
+            var name = contestant[1];
+            var fetchedParty = contestant[3];
+            var text = `User already voted to ${name}, ${fetchedParty}`;
+            $("#userVoted").html(text);
+          })
+        }  
+
+      })
+      .catch(function (err) {
+        console.error(err);
       });
 
     // ------------- fetching current phase code -------------
@@ -175,28 +155,41 @@ App = {
       .then(function (state) {
         var fetchedState;
         var fetchedStateAdmin;
-        phaseEnum = state.toString();
         if (state == 0) {
-          fetchedState =
-            "Registration phase is on , go register yourself to vote !!";
+          fetchedState = "Registration phase is LIVE, Please register yourself to vote !!";
           fetchedStateAdmin = "Registration";
+          $("#regDone").hide();
+          Promise.all(contestantsPromises).then(function () {
+            $("[id^='voteBtn-']").prop("disabled", true);
+          });
         } else if (state == 1) {
           fetchedState = "Voting is now live !!!";
           fetchedStateAdmin = "Voting";
+          $(document).ready(function() {
+            var buttons = $("[id^='voteBtn-']");
+            buttons.text("New Text");
+          });
+          $("#addCandiBtn").prop("disabled", true);
+          $("#voterPreRegBtn").prop("disabled", true);
+          $("#voterRegBtn").prop("disabled", true);
         } else {
           fetchedState = "Voting is now over !!!";
           fetchedStateAdmin = "Election over";
+          Promise.all(contestantsPromises).then(function () {
+            $("[id^='voteBtn-']").prop("disabled", true);
+          });
+          $("#changePhaseBtn").prop("disabled", true);
+          $("#addCandiBtn").prop("disabled", true);
+          $("#voterPreRegBtn").prop("disabled", true);
+          $("#voterRegBtn").prop("disabled", true);
         }
 
         var currentPhase = $("#currentPhase"); //for user
         currentPhase.empty();
         var currentPhaseAdmin = $("#currentPhaseAdmin"); //for admin
         currentPhaseAdmin.empty();
-        var phaseTemplate = "<h1>" + fetchedState + "</h1>";
-        var phaseTemplateAdmin =
-          "<h3> Current Phase : " + fetchedStateAdmin + "</h3>";
-        console.log(phaseTemplate);
-        console.log(phaseTemplateAdmin);
+        var phaseTemplate = `<h3>${fetchedState}</h3>`;
+        var phaseTemplateAdmin = `<h2> Current Phase : ${fetchedStateAdmin}</h2>`;
         currentPhase.append(phaseTemplate);
         currentPhaseAdmin.append(phaseTemplateAdmin);
       })
@@ -223,20 +216,15 @@ App = {
                 var fetchedAge = contestant[4];
                 var fetchedQualification = contestant[5];
 
-                var resultTemplate =
-                  "<tr><th>" +
-                  id +
-                  "</th><td>" +
-                  name +
-                  "</td><td>" +
-                  fetchedAge +
-                  "</td><td>" +
-                  fetchedParty +
-                  "</td><td>" +
-                  fetchedQualification +
-                  "</td><td>" +
-                  voteCount +
-                  "</td></tr>";
+                var resultTemplate = `
+                  <tr>
+                    <th>${id}</th>
+                    <td>${name}</td>
+                    <td>${fetchedAge}</td>
+                    <td>${fetchedParty}</td>
+                    <td>${voteCount}</td>
+                  </tr> 
+                `;
                 result.append(resultTemplate);
               });
             }
@@ -258,8 +246,8 @@ App = {
         return instance.vote(contestantId, { from: App.account });
       })
       .then(function (result) {
-        // $("#test").hide();
-        // $("#after").show();
+        $("#loader").show();
+        location.reload();
       })
       .catch(function (err) {
         console.error(err);
@@ -269,6 +257,8 @@ App = {
   // ------------- adding candidate code -------------
   addCandidate: function () {
     $("#loader").hide();
+    $("#addCandiBtn").prop("disabled", true);
+
     var name = $("#name").val();
     var age = $("#age").val();
     var party = $("#party").val();
@@ -280,7 +270,9 @@ App = {
 
     App.contracts.Contest.deployed()
       .then(function (instance) {
-        return instance.addContestant(name, party, age, qualification, { from: App.account });
+        return instance.addContestant(name, party, age, qualification, {
+          from: App.account,
+        });
       })
       .then(function (result) {
         $("#loader").show();
@@ -288,44 +280,31 @@ App = {
         $("#age").val("");
         $("#party").val("");
         $("#qualification").val("");
+        $("#addCandiBtn").prop("disabled", false);
       })
       .catch(function (err) {
+        $("#addCandiBtn").prop("disabled", false);
         console.error(err);
       });
   },
 
   // ------------- changing phase code -------------
   changeState: function () {
-    phaseEnum++;
-
-    // Modify contract to getState
-    /* 
-    var phaseEnum;
-    console.log("phaseEnum", phaseEnum);
-    App.contracts.Contest.deployed()
-    .then(function (instance) {
-      return instance.getState.call();
-    })
-    .then(function (result) {
-      phaseEnum = result
-    })
-    .catch(function (err) {
-      console.log(err.message);
-    });
-    */
-
-
+    $("#changePhaseBtn").prop("disabled", true);
     App.contracts.Contest.deployed()
       .then(function (instance) {
-        // Execute adopt as a transaction by sending account
-        // return instance.changeState(phaseEnum, { from: account });
         return instance.changeState({ from: App.account });
       })
       .then(function (result) {
         $("#content").hide();
         $("#loader").show();
+        $("#changePhaseBtn").prop("disabled", false);
+        location.reload();
       })
       .catch(function (err) {
+        if ((err.code = 336)) {
+          $("#changePhaseBtn").prop("disabled", false);
+        }
         console.error(err);
       });
   },
@@ -333,15 +312,19 @@ App = {
   // ------------- registering voter code -------------
   registerVoter: function () {
     var add = $("#accadd").val();
+    $("#voterRegBtn").prop("disabled", true);
     App.contracts.Contest.deployed()
       .then(function (instance) {
-        return instance.voterRegisteration(add, {from: App.account});
+        return instance.voterRegisteration(add, { from: App.account });
       })
       .then(function (result) {
         $("#content").hide();
         $("#loader").show();
+        $("#voterRegBtn").prop("disabled", false);
       })
       .catch(function (err) {
+        if (err = 4001)
+          $("#voterRegBtn").prop("disabled", false);
         console.error(err);
       });
   },

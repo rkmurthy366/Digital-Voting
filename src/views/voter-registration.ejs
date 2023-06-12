@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
-  <title>Best Actor Contest</title>
+  <title>Voter Registeration</title>
 
 
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
@@ -67,7 +67,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;"></a>
+            <a class="navbar-brand" href="javascript:;">Voter Registeration</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -83,11 +83,17 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header card-header-info">
-                  <h4 class="card-title">REGISTERATION</h4>
+                <div class="card-header card-header-success">
+                  <h4 class="card-title">Registeration</h4>
                 </div>
                 <div class="card-body">
                   <!-- form  -->
+                  <div id="regDone">
+                    <h2>Registration Phase Done!! <br>
+                      You cannot register now
+                    </h2>
+                  </div>
+                  <p id="accountAddress" class="text-center"></p>
                   <form action='/registerdata' method="post">
                     <!-- 2 column grid layout with text inputs for the first and last names -->
                     <div class="row">
@@ -110,19 +116,16 @@
                       </div>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-info btn-block mb-4">Register</button>
+                    <button type="submit" id="voterPreRegBtn" class="btn btn-success btn-block mb-4">Register</button>
                 </div>
                 </form>
               </div>
-              <div id="loader">
+              <div id="alertloader">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 </button>
                 <div>
                   <%=(typeof alertMsg!='undefined' )? alertMsg:''%>
                 </div>
-                <!-- <span>
-                        <b> Candidate </b> has been registered Successfully....!
-                      </span> -->
               </div>
             </div>
           </div>
@@ -138,9 +141,9 @@
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- <script src="js/web3.min.js"></script> -->
-  <!-- <script src="js/truffle-contract.js"></script> -->
-  <!-- <script src="js/app.js"></script> -->
+  <script src="js/web3.min.js"></script>
+  <script src="js/truffle-contract.js"></script>
+  <script src="js/app.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -340,29 +343,8 @@
     $(document).ready(function () {
       // Javascript method's body can be found in assets/js/demos.js
       md.initDashboardPageCharts();
-
     });
   </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- previous code -->

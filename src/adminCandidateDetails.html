@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
-    <title>Best Actor Contest</title>
+    <title>Candidate Details</title>
 
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
@@ -30,7 +30,7 @@
     <div class="wrapper">
       <div
         class="sidebar"
-        data-color="green"
+        data-color="purple"
         data-background-color="white"
         data-image="./assets/img/sidebar-1.jpg"
       >
@@ -65,6 +65,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/resultAdmin">
+                <i class="material-icons">assessment</i>
+                <p>Result</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/logout">
                 <i class="material-icons">logout</i>
                 <p>LogOut</p>
@@ -80,7 +86,7 @@
         >
           <div class="container-fluid">
             <div class="navbar-wrapper">
-              <a class="navbar-brand" href="javascript:;"></a>
+              <a class="navbar-brand" href="javascript:;">Candidate Details</a>
             </div>
             <button
               class="navbar-toggler"
@@ -103,23 +109,26 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
-                  <div class="card-header card-header-success">
+                  <div class="card-header card-header-warning">
                     <h4 class="card-title">Candidate Details</h4>
                   </div>
                   <div class="card-body">
                     <div>
-                      <table class="table">
+                      <h3 id="adminControl">
+                        You account is not Admin
+                      </h3>
+                      <hr />
+                      <p id="accountAddress" class="text-center"></p>
+                      <table class="table" style="text-align: center;">
                         <thead>
-                          <th scope="col">#</th>
-                          <th scope="col">Name</th>
+                          <th scope="col">Serial Num</th>
+                          <th scope="col">Candidate Name</th>
                           <th scope="col">Age</th>
                           <th scope="col">Party</th>
                           <th scope="col">Qualification</th>
-                          <th scope="col">Votes</th>
+                          <!-- <th scope="col">Votes</th> -->
                         </thead>
                         <tbody id="contestantsResultsAdmin"></tbody>
-                        <hr />
-                        <p id="accountAddress" class="text-center"></p>
                       </table>
                     </div>
                   </div>

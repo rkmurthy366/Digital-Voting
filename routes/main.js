@@ -1,3 +1,7 @@
+require('dotenv').config();
+var musername = process.env.MAIL_USERNAME
+var mpass = process.env.MAIL_PASSWORD
+
 var express = require("express");
 var conn = require("../database");
 var getAge = require("get-age");
@@ -18,18 +22,13 @@ var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     // user: "election.blockchain@gmail.com",
-    user: "",
-    pass: "",
+    user: musername,
+    pass: mpass,
   },
 });
 
 var account_address;
 var data;
-
-// app.use(express.static('public'));
-// //app.use('/css',express.static(__dirname+'public/css'));
-// //app.use(express.json());
-// app.use(express.urlencoded());
 
 router.post("/registerdata", function (req, res) {
   var dob = [],
@@ -37,43 +36,51 @@ router.post("/registerdata", function (req, res) {
     age,
     is_registerd;
   data = req.body.aadharno; //data stores aadhar no
-  console.log(data);
+  // console.log(data);
   account_address = req.body.account_address; //stores metamask acc address
-  //console.log(data);
   let sql = "SELECT * FROM aadhar_info WHERE Aadhar_No = ?";
   conn.query(sql, data, (error, results, fields) => {
+    console.log("results", results);
     if (error) {
       return console.error(error.message);
     }
-    console.log(results);
-    email = results[0].Email;
-    dob = results[0].Dob;
-    age = getAge(dob);
-    is_registerd = results[0].Is_registered;
-    if (is_registerd != "YES") {
-      if (age >= 18) {
-        var mailOptions = {
-          from: "",
-          to: email,
-          subject: "Please confirm your Email account",
-          text: "Hello, Your otp is " + rand,
-        };
-        transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log("Email sent: " + info.response);
-          }
-        });
-        res.render("emailverify.ejs");
-      } else {
-        res.send("You cannot vote as your age is less than 18");
-      }
-    } //IF USER ALREADY REGISTERED
-    else {
+
+    if (results.length < 1){
+      console.log("Invalid user", results);
       res.render("voter-registration.ejs", {
-        alertMsg: "You are already registered. You cannot register again",
+        alertMsg: "Invalid user",
       });
+    }
+    else {
+      email = results[0].Email;
+      dob = results[0].Dob;
+      age = getAge(dob);
+      is_registerd = results[0].Is_registered;
+      if (is_registerd != "YES") {
+        if (age >= 18) {
+          var mailOptions = {
+            from: "election.blockchain@gmail.com",
+            to: email,
+            subject: "Please confirm your Email account",
+            text: "Hello, Your otp is " + rand,
+          };
+          transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log("Email sent: " + info.response);
+            }
+          });
+          res.render("emailverify.ejs");
+        } else {
+          res.send("You cannot vote as your age is less than 18");
+        }
+      } //IF USER ALREADY REGISTERED
+      else {
+        res.render("voter-registration.ejs", {
+          alertMsg: "You are already registered. You cannot register again",
+        });
+      }
     }
   });
 });
@@ -81,7 +88,7 @@ router.post("/registerdata", function (req, res) {
 router.post("/otpverify", (req, res) => {
   var otp = req.body.otp;
   if (otp == rand) {
-    var record = { Account_address: account_address, Is_registered: "Yes" };
+    var record = { Account_address: account_address, Is_registered: "NO" };
     var sql = "INSERT INTO registered_users SET ?";
     conn.query(sql, record, function (err2, res2) {
       if (err2) {
@@ -95,7 +102,6 @@ router.post("/otpverify", (req, res) => {
           } else {
             console.log("1 record updated");
             var msg = "You are successfully registered";
-            // res.send('You are successfully registered');
             res.render("voter-registration.ejs", { alertMsg: msg });
           }
         });
@@ -107,18 +113,5 @@ router.post("/otpverify", (req, res) => {
     });
   }
 });
-
-// router.get('/register',function(req,res){
-//     res.sendFile(__dirname+'/views/index.html')
-// });
-
-/*app.get('/signin_signup',function(req,res){
-    res.sendFile(__dirname+'/views/signup.html')
-});
-
-app.get('/signup',function(req,res){
-    console.log(req.body);
-    res.sendFile(__dirname+'/views/signup.html')
-});*/
 
 module.exports = router;

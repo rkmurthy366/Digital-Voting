@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
-    <title>Best Actor Contest</title>
+    <title>Admin Voter Registeration</title>
 
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
@@ -34,7 +34,7 @@
     <div class="wrapper">
       <div
         class="sidebar"
-        data-color="green"
+        data-color="purple"
         data-background-color="white"
         data-image="./assets/img/sidebar-1.jpg"
       >
@@ -70,6 +70,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/resultAdmin">
+                <i class="material-icons">assessment</i>
+                <p>Result</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/logout">
                 <i class="material-icons">logout</i>
                 <p>LogOut</p>
@@ -85,7 +91,9 @@
         >
           <div class="container-fluid">
             <div class="navbar-wrapper">
-              <a class="navbar-brand" href="javascript:;"></a>
+              <a class="navbar-brand" href="javascript:;"
+                >Voter Registeration</a
+              >
             </div>
             <button
               class="navbar-toggler"
@@ -108,14 +116,23 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
-                  <div class="card-header card-header-success">
+                  <div class="card-header card-header-warning">
                     <h4 class="card-title">Voter Registration</h4>
                   </div>
                   <div class="card-body">
+                    <h3 id="adminControl">
+                      You account is not Admin
+                    </h3>
+                    <div id="regDone">
+                      <h3>
+                        Registration Phase Done!! <br />
+                        You cannot register now
+                      </h3>
+                    </div>
                     <div>
                       <table class="table">
                         <tr>
-                          <th>S.N</th>
+                          <th>Serial Number</th>
                           <th>Account address</th>
                           <th>Is registered</th>
                         </tr>
@@ -147,10 +164,27 @@
                         <!-- <label>Voter Account</label> -->
                       </div>
                       <br />
-                      <button type="submit" class="btn btn-success">
+                      <button
+                        type="submit"
+                        id="voterRegBtn"
+                        class="btn btn-warning"
+                      >
                         Register
                       </button>
                     </form>
+                  </div>
+                  <div class="alert alert-success" id="loader">
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <i class="material-icons">close</i>
+                    </button>
+                    <span>
+                      <b> Voter </b> has been registered Successfully....!</span
+                    >
                   </div>
                 </div>
               </div>
