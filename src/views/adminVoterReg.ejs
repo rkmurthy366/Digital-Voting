@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
-    <title>Admin Voter Registeration</title>
+    <title>Best Actor Contest</title>
 
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
@@ -34,7 +34,7 @@
     <div class="wrapper">
       <div
         class="sidebar"
-        data-color="purple"
+        data-color="green"
         data-background-color="white"
         data-image="./assets/img/sidebar-1.jpg"
       >
@@ -70,12 +70,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/resultAdmin">
-                <i class="material-icons">assessment</i>
-                <p>Result</p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="/logout">
                 <i class="material-icons">logout</i>
                 <p>LogOut</p>
@@ -91,9 +85,7 @@
         >
           <div class="container-fluid">
             <div class="navbar-wrapper">
-              <a class="navbar-brand" href="javascript:;"
-                >Voter Registeration</a
-              >
+              <a class="navbar-brand" href="javascript:;"></a>
             </div>
             <button
               class="navbar-toggler"
@@ -116,28 +108,19 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
-                  <div class="card-header card-header-warning">
+                  <div class="card-header card-header-success">
                     <h4 class="card-title">Voter Registration</h4>
                   </div>
                   <div class="card-body">
-                    <h3 id="adminControl">
-                      You account is not Admin
-                    </h3>
-                    <div id="regDone">
-                      <h3>
-                        Registration Phase Done!! <br />
-                        You cannot register now
-                      </h3>
-                    </div>
                     <div>
                       <table class="table">
                         <tr>
-                          <th>Serial Number</th>
+                          <th>S.N</th>
                           <th>Account address</th>
                           <th>Is registered</th>
                         </tr>
 
-                        <% if(userData.length!=0){ let i=1;
+                        <% if(userData.length!=0){ var i=1;
                         userData.forEach(function(data){ console.log(data) %>
                         <tr>
                           <td><%=i; %></td>
@@ -157,34 +140,17 @@
                         <input
                           type="text"
                           class="form-control"
-                          id="voterAccAddr"
+                          id="accadd"
                           placeholder="Please Enter Voter Account Address here.."
                           required
                         />
                         <!-- <label>Voter Account</label> -->
                       </div>
                       <br />
-                      <button
-                        type="submit"
-                        id="voterRegBtn"
-                        class="btn btn-warning"
-                      >
+                      <button type="submit" class="btn btn-success">
                         Register
                       </button>
                     </form>
-                  </div>
-                  <div class="alert alert-success" id="loader">
-                    <button
-                      type="button"
-                      class="close"
-                      data-dismiss="alert"
-                      aria-label="Close"
-                    >
-                      <i class="material-icons">close</i>
-                    </button>
-                    <span>
-                      <b> Voter </b> has been registered Successfully....!</span
-                    >
                   </div>
                 </div>
               </div>
@@ -268,7 +234,7 @@
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
 
-            let new_color = $(this).data("color");
+            var new_color = $(this).data("color");
 
             if ($sidebar.length != 0) {
               $sidebar.attr("data-color", new_color);
@@ -287,7 +253,7 @@
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
 
-            let new_color = $(this).data("background-color");
+            var new_color = $(this).data("background-color");
 
             if ($sidebar.length != 0) {
               $sidebar.attr("data-background-color", new_color);
@@ -300,7 +266,7 @@
             $(this).parent("li").siblings().removeClass("active");
             $(this).parent("li").addClass("active");
 
-            let new_image = $(this).find("img").attr("src");
+            var new_image = $(this).find("img").attr("src");
 
             if (
               $sidebar_img_container.length != 0 &&
@@ -319,7 +285,7 @@
               $full_page_background.length != 0 &&
               $(".switch-sidebar-image input:checked").length != 0
             ) {
-              let new_image_full_page = $(".fixed-plugin li.active .img-holder")
+              var new_image_full_page = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .data("src");
 
@@ -333,10 +299,10 @@
             }
 
             if ($(".switch-sidebar-image input:checked").length == 0) {
-              let new_image = $(".fixed-plugin li.active .img-holder")
+              var new_image = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .attr("src");
-              let new_image_full_page = $(".fixed-plugin li.active .img-holder")
+              var new_image_full_page = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .data("src");
 
@@ -413,7 +379,7 @@
             }
 
             // we simulate the window Resize so the charts will get updated in realtime.
-            let simulateWindowResize = setInterval(function () {
+            var simulateWindowResize = setInterval(function () {
               window.dispatchEvent(new Event("resize"));
             }, 180);
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
-    <title>Candidate Details</title>
+    <title>Best Actor Contest</title>
 
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
@@ -30,7 +30,7 @@
     <div class="wrapper">
       <div
         class="sidebar"
-        data-color="purple"
+        data-color="green"
         data-background-color="white"
         data-image="./assets/img/sidebar-1.jpg"
       >
@@ -65,12 +65,6 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/resultAdmin">
-                <i class="material-icons">assessment</i>
-                <p>Result</p>
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="/logout">
                 <i class="material-icons">logout</i>
                 <p>LogOut</p>
@@ -86,7 +80,7 @@
         >
           <div class="container-fluid">
             <div class="navbar-wrapper">
-              <a class="navbar-brand" href="javascript:;">Candidate Details</a>
+              <a class="navbar-brand" href="javascript:;"></a>
             </div>
             <button
               class="navbar-toggler"
@@ -109,26 +103,23 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="card">
-                  <div class="card-header card-header-warning">
+                  <div class="card-header card-header-success">
                     <h4 class="card-title">Candidate Details</h4>
                   </div>
                   <div class="card-body">
                     <div>
-                      <h3 id="adminControl">
-                        You account is not Admin
-                      </h3>
-                      <hr />
-                      <p id="accountAddress" class="text-center"></p>
-                      <table class="table" style="text-align: center;">
+                      <table class="table">
                         <thead>
-                          <th scope="col">Serial Num</th>
-                          <th scope="col">Candidate Name</th>
+                          <th scope="col">#</th>
+                          <th scope="col">Name</th>
                           <th scope="col">Age</th>
                           <th scope="col">Party</th>
                           <th scope="col">Qualification</th>
-                          <!-- <th scope="col">Votes</th> -->
+                          <th scope="col">Votes</th>
                         </thead>
                         <tbody id="contestantsResultsAdmin"></tbody>
+                        <hr />
+                        <p id="accountAddress" class="text-center"></p>
                       </table>
                     </div>
                   </div>
@@ -215,7 +206,7 @@
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
 
-            let new_color = $(this).data("color");
+            var new_color = $(this).data("color");
 
             if ($sidebar.length != 0) {
               $sidebar.attr("data-color", new_color);
@@ -234,7 +225,7 @@
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
 
-            let new_color = $(this).data("background-color");
+            var new_color = $(this).data("background-color");
 
             if ($sidebar.length != 0) {
               $sidebar.attr("data-background-color", new_color);
@@ -247,7 +238,7 @@
             $(this).parent("li").siblings().removeClass("active");
             $(this).parent("li").addClass("active");
 
-            let new_image = $(this).find("img").attr("src");
+            var new_image = $(this).find("img").attr("src");
 
             if (
               $sidebar_img_container.length != 0 &&
@@ -266,7 +257,7 @@
               $full_page_background.length != 0 &&
               $(".switch-sidebar-image input:checked").length != 0
             ) {
-              let new_image_full_page = $(".fixed-plugin li.active .img-holder")
+              var new_image_full_page = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .data("src");
 
@@ -280,10 +271,10 @@
             }
 
             if ($(".switch-sidebar-image input:checked").length == 0) {
-              let new_image = $(".fixed-plugin li.active .img-holder")
+              var new_image = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .attr("src");
-              let new_image_full_page = $(".fixed-plugin li.active .img-holder")
+              var new_image_full_page = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .data("src");
 
@@ -360,7 +351,7 @@
             }
 
             // we simulate the window Resize so the charts will get updated in realtime.
-            let simulateWindowResize = setInterval(function () {
+            var simulateWindowResize = setInterval(function () {
               window.dispatchEvent(new Event("resize"));
             }, 180);
 

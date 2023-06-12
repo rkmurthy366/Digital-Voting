@@ -1,90 +1,33 @@
-NOT using files
-vote_area.html
+NOT using pages
+dashboard.ejs
 voting.html
-first_page.js
-user.js
 
-x-----------------x-----------------x-----------------x-----------------x
-x-----------------x-----------------x-----------------x-----------------x
-x-----------------x-----------------x-----------------x-----------------x
 
-npm install
-npm install -g truffle
-npm start
+Contract edit
 
-RPC: http://127.0.0.1:7545
-Chain Id: 1337
-Symbol: ETH
-https://trufflesuite.com/ganache/
-https://www.youtube.com/watch?v=7S_tz1z_5bA&t=1391s
-https://dev.mysql.com/downloads/windows/installer/8.0.html
 
-truffle compile
-truffle migrate
-truffle migrate --reset
-
-x-----------------x-----------------x-----------------x-----------------x
-x-----------------x-----------------x-----------------x-----------------x
-x-----------------x-----------------x-----------------x-----------------x
-
-card-header-info -> blue
-card-header-success -> green
-card-header-primary -> purple
-card-header-warinig -> orange
-card-header-danger -> red
-card-header-rose -> maroon
-
-/adlogin -> admin_login.js -> admin_login.ejs
-/register -> registration-route.js -> registration-form.ejs
-/login -> login-route.js -> login-form.ejs
-/logout -> logout-route.js
-/form -> main.js -> voter-registration.ejs
-                 -> emailverify.ejs
+Errors in frontend
+refresh page when state is changed
+disable buttons when not in use
+stop showing content when not in use
 
 ADMIN
-Candidate details -> adminCandidateDetails.html
-Add Candidate -> adminAddCandidate.html
-Register -> adminVoterReg.ejs -> table_view.js (/table_view)
-Change Phase -> adminChangePhase.html
-Result -> adminResult.html
-Logout -> /logout
+** Candidate details -> stop showing votes
+** add Candidate -> disable button in different phase
+** Register -> 
+disable button in different phase
+go for a script registration which registers all users in one click
+** change phase -> disable button when not able to change phase
+** Logout -> no changes
 
 USER
-Information -> userInfo.html
-Voter Registration -> voter-registration.ejs -> main.js (/form)
-Voting Area -> dashboard.ejs -> dashboard-route.js (/dashboard)
-Result -> result.html
-Logout -> /logout
+** Information -> no change
+** Voter Registration -> disable register button in different phase
+** Voting Area -> lot many changes
+** Result -> 
+** Logout -> no changes
 
-x-----------------x-----------------x-----------------x-----------------x
-x-----------------x-----------------x-----------------x-----------------x
-x-----------------x-----------------x-----------------x-----------------x
 
-OTHERS
-NOT DONE ** password SHA
-DONE ** Remove Browsersync pop-up
-DONE ** password length < 8, notify them
-DONE ** if passwords din't match during registration, notify them
-DONE ** .env file
-DONE ** git setup
 
-ADMIN
-NOT DONE ** Register -> go for a script registration which registers all users in one click
-NOT DONE ** Register -> change state to YES after successful registration
-DONE ** Candidate details -> stop showing votes 
-DONE ** add Candidate -> disable button in different phase
-DONE ** Register -> disable button in different phase
-DONE ** change phase -> disable button when not able to change phase
-DONE ** Logout -> no changes
-DONE ** if not admin , disable all admin functions (change wallet address)
 
-USER
-DONE ** Result -> display the winner
-DONE ** Information -> no change
-DONE ** Voter Registration -> disable register button in different phase
-DONE ** Logout -> no changes
-DONE ** Voting Area -> lot many changes 
-    DONE *** (later) make into table format, instead of this cards format
-    DONE *** disable "CLICK HERE TO VOTE BUTTON" under different phases
-    DONE *** during voting phase: disable vote button if user already voted
-    DONE *** display to whom did the user vote
+

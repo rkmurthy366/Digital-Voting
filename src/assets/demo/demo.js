@@ -1,5 +1,5 @@
 demo = {
-  initDocumentationCharts: function () {
+  initDocumentationCharts: function() {
     if ($('#dailySalesChart').length != 0 && $('#websiteViewsChart').length != 0) {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
@@ -24,13 +24,13 @@ demo = {
         },
       }
 
-      let dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+      var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
 
-      let animationHeaderChart = new Chartist.Line('#websiteViewsChart', dataDailySalesChart, optionsDailySalesChart);
+      var animationHeaderChart = new Chartist.Line('#websiteViewsChart', dataDailySalesChart, optionsDailySalesChart);
     }
   },
 
-  initDashboardPageCharts: function () {
+  initDashboardPageCharts: function() {
 
     if ($('#dailySalesChart').length != 0 || $('#completedTasksChart').length != 0 || $('#websiteViewsChart').length != 0) {
       /* ----------==========     Daily Sales Chart initialization    ==========---------- */
@@ -56,7 +56,7 @@ demo = {
         },
       }
 
-      let dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+      var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
 
       md.startAnimationForLineChart(dailySalesChart);
 
@@ -85,7 +85,7 @@ demo = {
         }
       }
 
-      let completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
+      var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
 
       // start animation for the Completed Tasks Chart - Line Chart
       md.startAnimationForLineChart(completedTasksChart);
@@ -93,14 +93,14 @@ demo = {
 
       /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
-      let dataWebsiteViewsChart = {
+      var dataWebsiteViewsChart = {
         labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
         series: [
           [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
 
         ]
       };
-      let optionsWebsiteViewsChart = {
+      var optionsWebsiteViewsChart = {
         axisX: {
           showGrid: false
         },
@@ -113,26 +113,26 @@ demo = {
           left: 0
         }
       };
-      let responsiveOptions = [
+      var responsiveOptions = [
         ['screen and (max-width: 640px)', {
           seriesBarDistance: 5,
           axisX: {
-            labelInterpolationFnc: function (value) {
+            labelInterpolationFnc: function(value) {
               return value[0];
             }
           }
         }]
       ];
-      let websiteViewsChart = Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
+      var websiteViewsChart = Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
 
       //start animation for the Emails Subscription Chart
       md.startAnimationForBarChart(websiteViewsChart);
     }
   },
 
-  initGoogleMaps: function () {
-    let myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-    let mapOptions = {
+  initGoogleMaps: function() {
+    var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
+    var mapOptions = {
       zoom: 13,
       center: myLatlng,
       scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
@@ -223,9 +223,9 @@ demo = {
       }]
 
     };
-    let map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-    let marker = new google.maps.Marker({
+    var marker = new google.maps.Marker({
       position: myLatlng,
       title: "Hello World!"
     });

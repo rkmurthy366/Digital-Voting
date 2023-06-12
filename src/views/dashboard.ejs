@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
-    <title>Voting Area</title>
+    <title>Best Actor Contest</title>
 
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
@@ -85,7 +85,7 @@
         >
           <div class="container-fluid">
             <div class="navbar-wrapper">
-              <a class="navbar-brand" href="javascript:;">Voting Area</a>
+              <a class="navbar-brand" href="javascript:;"></a>
             </div>
             <button
               class="navbar-toggler"
@@ -103,48 +103,64 @@
           </div>
         </nav>
 
-        <div class="content">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header card-header-success">
-                    <h4 class="card-title">Voting Area</h4>
-                  </div>
-                  <div class="card-body">
-                    <div id="currentPhase"></div>
-                    <h3 id="userVoted"></h3>
-                    <div>
-                      <hr />
-                      <p id="accountAddress" class="text-center"></p>
-                      <table class="table" style="text-align: center;">
-                        <thead>
-                          <tr>
-                            <th scope="col">Serial Num</th>
-                            <th scope="col">Party</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Vote</th>
-                          </tr>
-                        </thead>
-                        <tbody id="votingCenter"></tbody>
-                      </table>
-                      <!-- <div class="alert alert-success" id="loader">
-                        <button
-                          type="button"
-                          class="close"
-                          data-dismiss="alert"
-                          aria-label="Close"
-                        >
-                          <i class="material-icons">close</i>
-                        </button>
-                        <span>Your vote is successful!!!</span>
-                      </div> -->
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="content" style="margin-top: 20px !important">
+          <div class="container" style="width: 850px">
+            <div id="currentPhase"></div>
+            <div>
+              <!-- <form onsubmit="App.castVote(); return false;">
+						<div class="form-group">
+						  <label for="contestantSelect">Select Contestant : </label>
+						  <select class="form-select form-select-lg mb-3" id="contestantSelect"></select>
+						  <button type="submit" class="btn btn-info">Cast your vote</button>
+						</div>
+						
+					  </form> -->
             </div>
+
+            <div class="row" id="test">
+              <!-- <div class='card' style='width: 18rem;  margin: 1rem;'>
+								<img class='card-img-top'
+									src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Gfp-missouri-st-louis-clubhouse-pond-and-scenery.jpg/1199px-Gfp-missouri-st-louis-clubhouse-pond-and-scenery.jpg'
+									alt=''>
+			
+								<div class='card-body text-center'>
+									<h4 class='card-title'>BJP</h4>
+									<button type='button' class='btn btn-info' data-toggle='modal'
+										data-target='#exampleModalCenter1'>
+										More info
+									</button>
+									<div class='modal fade' id='exampleModalCenter1' tabindex='-1' role='dialog'
+										aria-labelledby='exampleModalCenterTitle' aria-hidden='true'>
+										<div class='modal-dialog modal-dialog-centered' role='document'>
+											<div class='modal-content'>
+												<div class='modal-header'>
+													<h5 class='modal-title' id='exampleModalLongTitle'>BJP</h5>
+													<button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+														<span aria-hidden='true'>&times;</span>
+													</button>
+												</div>
+												<div class='modal-body'>
+													
+														Name: Amruta Dodke <br>
+														Age: 21 <br>
+														Qualification: B.E. <br>
+													
+													
+												</div>
+												<div class='modal-footer'>
+													<button type='button' class='btn btn-info' data-dismiss='modal'>Close</button>
+												</div>
+											</div>
+										</div>
+									</div>
+						</div>
+					</div>	 -->
+            </div>
+            <!-- <div class="alert alert-info" id="after">
+          <span>
+            Your <b> VOTE </b> has been registerd Successfully....!
+          </span>
+        </div> -->
           </div>
         </div>
 
@@ -225,7 +241,7 @@
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
 
-            let new_color = $(this).data("color");
+            var new_color = $(this).data("color");
 
             if ($sidebar.length != 0) {
               $sidebar.attr("data-color", new_color);
@@ -244,7 +260,7 @@
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
 
-            let new_color = $(this).data("background-color");
+            var new_color = $(this).data("background-color");
 
             if ($sidebar.length != 0) {
               $sidebar.attr("data-background-color", new_color);
@@ -257,7 +273,7 @@
             $(this).parent("li").siblings().removeClass("active");
             $(this).parent("li").addClass("active");
 
-            let new_image = $(this).find("img").attr("src");
+            var new_image = $(this).find("img").attr("src");
 
             if (
               $sidebar_img_container.length != 0 &&
@@ -276,7 +292,7 @@
               $full_page_background.length != 0 &&
               $(".switch-sidebar-image input:checked").length != 0
             ) {
-              let new_image_full_page = $(".fixed-plugin li.active .img-holder")
+              var new_image_full_page = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .data("src");
 
@@ -290,10 +306,10 @@
             }
 
             if ($(".switch-sidebar-image input:checked").length == 0) {
-              let new_image = $(".fixed-plugin li.active .img-holder")
+              var new_image = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .attr("src");
-              let new_image_full_page = $(".fixed-plugin li.active .img-holder")
+              var new_image_full_page = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .data("src");
 
@@ -370,7 +386,7 @@
             }
 
             // we simulate the window Resize so the charts will get updated in realtime.
-            let simulateWindowResize = setInterval(function () {
+            var simulateWindowResize = setInterval(function () {
               window.dispatchEvent(new Event("resize"));
             }, 180);
 

@@ -1,8 +1,8 @@
-let express = require("express");
-let db = require("../database");
+var express = require("express");
+var db = require("../database");
 
-let router = express.Router();
-let app = express();
+var router = express.Router();
+var app = express();
 app.use(express.static("public"));
 app.use("/css", express.static(__dirname + "public/css"));
 /* GET users listing. */
@@ -11,10 +11,10 @@ router.get("/adlogin", function (req, res, next) {
 });
 
 router.post("/adlogin", function (req, res) {
-  let emailAddress = req.body.email_address;
-  let password = req.body.password;
+  var emailAddress = req.body.email_address;
+  var password = req.body.password;
 
-  let sql = "SELECT * FROM admin WHERE email_address =? AND password =?";
+  var sql = "SELECT * FROM admin WHERE email_address =? AND password =?";
   db.query(sql, [emailAddress, password], function (err, data, fields) {
     if (err) throw err;
     if (data.length > 0) {
