@@ -4,31 +4,35 @@ voting.html
 first_page.js
 user.js
 
+x-----------------x-----------------x-----------------x-----------------x
+x-----------------x-----------------x-----------------x-----------------x
+x-----------------x-----------------x-----------------x-----------------x
+
+npm install
+npm install -g truffle
+npm start
+
+RPC: http://127.0.0.1:7545
+Chain Id: 1337
+Symbol: ETH
+https://trufflesuite.com/ganache/
+https://www.youtube.com/watch?v=7S_tz1z_5bA&t=1391s
+https://dev.mysql.com/downloads/windows/installer/8.0.html
+
+truffle compile
+truffle migrate
+truffle migrate --reset
+
+x-----------------x-----------------x-----------------x-----------------x
+x-----------------x-----------------x-----------------x-----------------x
+x-----------------x-----------------x-----------------x-----------------x
+
 card-header-info -> blue
 card-header-success -> green
 card-header-primary -> purple
 card-header-warinig -> orange
 card-header-danger -> red
 card-header-rose -> maroon
-
-
-Contract edit
-Migrate again
-
-npm install
-npm install -g truffle
-https://trufflesuite.com/ganache/
-RPC: http://127.0.0.1:7545
-Chain Id: 1337
-Symbol: ETH
-https://www.youtube.com/watch?v=7S_tz1z_5bA&t=1391s
-https://dev.mysql.com/downloads/windows/installer/8.0.html
-npm start
-
-truffle compile
-truffle migrate
-truffle migrate --reset
-
 
 /adlogin -> admin_login.js -> admin_login.ejs
 /register -> registration-route.js -> registration-form.ejs
@@ -52,10 +56,17 @@ Voting Area -> dashboard.ejs -> dashboard-route.js (/dashboard)
 Result -> result.html
 Logout -> /logout
 
+x-----------------x-----------------x-----------------x-----------------x
+x-----------------x-----------------x-----------------x-----------------x
+x-----------------x-----------------x-----------------x-----------------x
 
+OTHERS
 NOT DONE ** password SHA
+DONE ** Remove Browsersync pop-up
 DONE ** password length < 8, notify them
 DONE ** if passwords din't match during registration, notify them
+DONE ** .env file
+DONE ** git setup
 
 ADMIN
 NOT DONE ** Register -> go for a script registration which registers all users in one click
@@ -77,11 +88,3 @@ DONE ** Voting Area -> lot many changes
     DONE *** disable "CLICK HERE TO VOTE BUTTON" under different phases
     NOT DONE *** during voting phase: disable vote button if user already voted
     NOT DONE *** display to whom did the user vote
-
-
-OTHERS
-DONE ** Remove Browsersync pop-up
-
-
-
-
