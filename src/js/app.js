@@ -36,7 +36,7 @@ App = {
 
   initContract: function () {
     $.getJSON("Contest.json", function (data) {
-      var contest = data;
+      let contest = data;
       App.contracts.Contest = TruffleContract(contest);
       App.contracts.Contest.setProvider(web3.currentProvider);
       return App.render();
@@ -44,9 +44,9 @@ App = {
   },
 
   render: function () {
-    var contestInstance;
-    var loader = $("#loader");
-    var content = $("#content");
+    let contestInstance;
+    let loader = $("#loader");
+    let content = $("#content");
     loader.show();
     content.hide();
     $("#after").hide();
@@ -67,28 +67,28 @@ App = {
     });
 
     // ------------- fetching candidates to front end from blockchain code-------------
-    var contestantsPromises = [];
+    let contestantsPromises = [];
     App.contracts.Contest.deployed()
       .then(function (instance) {
         contestInstance = instance;
         return contestInstance.contestantsCount();
       })
       .then(function (contestantsCount) {
-        var contestantsResults = $("#votingCenter");
+        let contestantsResults = $("#votingCenter");
         contestantsResults.empty();
-        var contestantsResultsAdmin = $("#contestantsResultsAdmin");
+        let contestantsResultsAdmin = $("#contestantsResultsAdmin");
         contestantsResultsAdmin.empty();
         
-        for (var i = 1; i <= contestantsCount; i++) {
-          var promise = contestInstance.contestants(i).then(function (contestant) {
-            var id = contestant[0];
-            var name = contestant[1];
-            var voteCount = contestant[2];
-            var fetchedParty = contestant[3];
-            var fetchedAge = contestant[4];
-            var fetchedQualification = contestant[5];
+        for (let i = 1; i <= contestantsCount; i++) {
+          let promise = contestInstance.contestants(i).then(function (contestant) {
+            let id = contestant[0];
+            let name = contestant[1];
+            let voteCount = contestant[2];
+            let fetchedParty = contestant[3];
+            let fetchedAge = contestant[4];
+            let fetchedQualification = contestant[5];
             
-            var contestantTemplate =`
+            let contestantTemplate =`
               <tr>
                 <th>${id}</th>
                 <td>${fetchedParty}</td>
@@ -99,7 +99,7 @@ App = {
             `;
             contestantsResults.append(contestantTemplate);
 
-            var contestantTemplateAdmin = `
+            let contestantTemplateAdmin = `
               <tr>
                 <th>${id}</th>
                 <td>${name}</td>
@@ -126,18 +126,18 @@ App = {
         return contestInstance.voters(App.account);
       })
       .then(function (voter) {
-        var contestentId = voter[2];
+        let contestentId = voter[2];
         console.log(contestentId)
         if(!contestentId){
           // user dint vote
-          var text = `User dint vote yet`;
+          let text = `User dint vote yet`;
           $("#userVoted").html(text);
         } else {
           // user voted to getContestentVoted
           contestInstance.contestants(contestentId).then(function (contestant) {
-            var name = contestant[1];
-            var fetchedParty = contestant[3];
-            var text = `User already voted to ${name}, ${fetchedParty}`;
+            let name = contestant[1];
+            let fetchedParty = contestant[3];
+            let text = `User already voted to ${name}, ${fetchedParty}`;
             $("#userVoted").html(text);
           })
         }  
@@ -153,8 +153,8 @@ App = {
         return instance.state();
       })
       .then(function (state) {
-        var fetchedState;
-        var fetchedStateAdmin;
+        let fetchedState;
+        let fetchedStateAdmin;
         if (state == 0) {
           fetchedState = "Registration phase is LIVE, Please register yourself to vote !!";
           fetchedStateAdmin = "Registration";
@@ -166,7 +166,7 @@ App = {
           fetchedState = "Voting is now live !!!";
           fetchedStateAdmin = "Voting";
           $(document).ready(function() {
-            var buttons = $("[id^='voteBtn-']");
+            let buttons = $("[id^='voteBtn-']");
             buttons.text("New Text");
           });
           $("#addCandiBtn").prop("disabled", true);
@@ -184,12 +184,12 @@ App = {
           $("#voterRegBtn").prop("disabled", true);
         }
 
-        var currentPhase = $("#currentPhase"); //for user
+        let currentPhase = $("#currentPhase"); //for user
         currentPhase.empty();
-        var currentPhaseAdmin = $("#currentPhaseAdmin"); //for admin
+        let currentPhaseAdmin = $("#currentPhaseAdmin"); //for admin
         currentPhaseAdmin.empty();
-        var phaseTemplate = `<h3>${fetchedState}</h3>`;
-        var phaseTemplateAdmin = `<h2> Current Phase : ${fetchedStateAdmin}</h2>`;
+        let phaseTemplate = `<h3>${fetchedState}</h3>`;
+        let phaseTemplateAdmin = `<h2> Current Phase : ${fetchedStateAdmin}</h2>`;
         currentPhase.append(phaseTemplate);
         currentPhaseAdmin.append(phaseTemplateAdmin);
       })
@@ -203,20 +203,20 @@ App = {
         return instance.state();
       })
       .then(function (state) {
-        var result = $("#Results");
+        let result = $("#Results");
         if (state == 2) {
           $("#not").hide();
           contestInstance.contestantsCount().then(function (contestantsCount) {
-            for (var i = 1; i <= contestantsCount; i++) {
+            for (let i = 1; i <= contestantsCount; i++) {
               contestInstance.contestants(i).then(function (contestant) {
-                var id = contestant[0];
-                var name = contestant[1];
-                var voteCount = contestant[2];
-                var fetchedParty = contestant[3];
-                var fetchedAge = contestant[4];
-                var fetchedQualification = contestant[5];
+                let id = contestant[0];
+                let name = contestant[1];
+                let voteCount = contestant[2];
+                let fetchedParty = contestant[3];
+                let fetchedAge = contestant[4];
+                let fetchedQualification = contestant[5];
 
-                var resultTemplate = `
+                let resultTemplate = `
                   <tr>
                     <th>${id}</th>
                     <td>${name}</td>
@@ -240,7 +240,7 @@ App = {
 
   // ------------- voting code -------------
   castVote: function (id) {
-    var contestantId = id;
+    let contestantId = id;
     App.contracts.Contest.deployed()
       .then(function (instance) {
         return instance.vote(contestantId, { from: App.account });
@@ -259,10 +259,10 @@ App = {
     $("#loader").hide();
     $("#addCandiBtn").prop("disabled", true);
 
-    var name = $("#name").val();
-    var age = $("#age").val();
-    var party = $("#party").val();
-    var qualification = $("#qualification").val();
+    let name = $("#name").val();
+    let age = $("#age").val();
+    let party = $("#party").val();
+    let qualification = $("#qualification").val();
     console.log("name=", name);
     console.log("age=", age);
     console.log("party=", party);
@@ -311,7 +311,7 @@ App = {
 
   // ------------- registering voter code -------------
   registerVoter: function () {
-    var add = $("#accadd").val();
+    let add = $("#accadd").val();
     $("#voterRegBtn").prop("disabled", true);
     App.contracts.Contest.deployed()
       .then(function (instance) {

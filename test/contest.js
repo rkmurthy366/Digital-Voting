@@ -1,4 +1,4 @@
-var Contest =artifacts.require("./Contest.sol");
+let Contest =artifacts.require("./Contest.sol");
 
 contract("Contest",function(accounts){
 

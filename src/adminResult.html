@@ -220,7 +220,7 @@
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
 
-            var new_color = $(this).data("color");
+            let new_color = $(this).data("color");
 
             if ($sidebar.length != 0) {
               $sidebar.attr("data-color", new_color);
@@ -239,7 +239,7 @@
             $(this).siblings().removeClass("active");
             $(this).addClass("active");
 
-            var new_color = $(this).data("background-color");
+            let new_color = $(this).data("background-color");
 
             if ($sidebar.length != 0) {
               $sidebar.attr("data-background-color", new_color);
@@ -252,7 +252,7 @@
             $(this).parent("li").siblings().removeClass("active");
             $(this).parent("li").addClass("active");
 
-            var new_image = $(this).find("img").attr("src");
+            let new_image = $(this).find("img").attr("src");
 
             if (
               $sidebar_img_container.length != 0 &&
@@ -271,7 +271,7 @@
               $full_page_background.length != 0 &&
               $(".switch-sidebar-image input:checked").length != 0
             ) {
-              var new_image_full_page = $(".fixed-plugin li.active .img-holder")
+              let new_image_full_page = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .data("src");
 
@@ -285,10 +285,10 @@
             }
 
             if ($(".switch-sidebar-image input:checked").length == 0) {
-              var new_image = $(".fixed-plugin li.active .img-holder")
+              let new_image = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .attr("src");
-              var new_image_full_page = $(".fixed-plugin li.active .img-holder")
+              let new_image_full_page = $(".fixed-plugin li.active .img-holder")
                 .find("img")
                 .data("src");
 
@@ -365,7 +365,7 @@
             }
 
             // we simulate the window Resize so the charts will get updated in realtime.
-            var simulateWindowResize = setInterval(function () {
+            let simulateWindowResize = setInterval(function () {
               window.dispatchEvent(new Event("resize"));
             }, 180);
 

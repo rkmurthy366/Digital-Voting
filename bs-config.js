@@ -1,15 +1,15 @@
-var express = require("express");
-var app = express();
+let express = require("express");
+let app = express();
 const ejs = require("ejs");
 app.use(express.urlencoded());
 app.use(express.static("src"));
-var session = require("express-session");
-var bodyParser = require("body-parser");
+let session = require("express-session");
+let bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // fetching table
-var path = require("path");
+let path = require("path");
 app.set("views", path.join(__dirname, "/src/views"));
 app.set("view engine", "ejs");
 
@@ -23,13 +23,13 @@ app.use(
   })
 );
 
-var registrationRouter = require("./routes/registration-route");
-var loginRouter = require("./routes/login-route");
-var logoutRouter = require("./routes/logout-route");
-var adminLogin = require("./routes/admin_login");
-var dashboardRouter = require("./routes/dashboard-route");
-var registerRouter = require("./routes/main");
-var tableview = require("./routes/table_view");
+let registrationRouter = require("./routes/registration-route");
+let loginRouter = require("./routes/login-route");
+let logoutRouter = require("./routes/logout-route");
+let adminLogin = require("./routes/admin_login");
+let dashboardRouter = require("./routes/dashboard-route");
+let registerRouter = require("./routes/main");
+let tableview = require("./routes/table_view");
 
 app.use("/", registrationRouter);
 app.use("/", loginRouter);

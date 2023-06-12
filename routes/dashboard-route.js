@@ -1,6 +1,6 @@
-var express = require("express");
-// var auth = require('auth');
-var router = express.Router();
+let express = require("express");
+// let auth = require('auth');
+let router = express.Router();
 /* GET users listing. */
 router.get("/dashboard", function (req, res, next) {
   if (req.session.loggedinUser) {

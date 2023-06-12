@@ -1,7 +1,7 @@
-var express = require("express");
-var router = express.Router();
-var db = require("../database");
-var app = express();
+let express = require("express");
+let router = express.Router();
+let db = require("../database");
+let app = express();
 app.use(express.urlencoded());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -23,22 +23,22 @@ router.post("/register", function (req, res, next) {
   };
 
   // check unique email address
-  var sql = "SELECT * FROM registration WHERE email_address = ?";
+  let sql = "SELECT * FROM registration WHERE email_address = ?";
   db.query(sql, [inputData.email_address], function (err, data, fields) {
     if (err) throw err;
-    var msg = ""
+    let msg = ""
     if (data.length > 0) {
-      var msg = "Can't Register!! Email already exist";
+      let msg = "Can't Register!! Email already exist";
       res.render("registration-form.ejs", { alertMsg: msg });
     } 
     else if (inputData.password.length < 8) {
-      var msg = "Your password must be at least 8 characters";
+      let msg = "Your password must be at least 8 characters";
     } 
     else if (inputData.confirm_password != inputData.password) {
-      var msg = "Password & Confirm Password do not Matched";
+      let msg = "Password & Confirm Password do not Matched";
     } else {
       // save users data into database
-      var sql = "INSERT INTO registration SET ?";
+      let sql = "INSERT INTO registration SET ?";
       const mdata = {
         first_name: inputData.first_name,
         email_address: inputData.email_address,
@@ -47,7 +47,7 @@ router.post("/register", function (req, res, next) {
       db.query(sql, mdata, function (err, data) {
         if (err) console.log(err);
       });
-      var msg = "Your are successfully registered. Please login";
+      let msg = "Your are successfully registered. Please login";
     }
     res.render("registration-form.ejs", { alertMsg: msg });
   });

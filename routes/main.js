@@ -1,13 +1,13 @@
 require('dotenv').config();
-var musername = process.env.MAIL_USERNAME
-var mpass = process.env.MAIL_PASSWORD
+let musername = process.env.MAIL_USERNAME
+let mpass = process.env.MAIL_PASSWORD
 
-var express = require("express");
-var conn = require("../database");
-var getAge = require("get-age");
-var nodemailer = require("nodemailer");
+let express = require("express");
+let conn = require("../database");
+let getAge = require("get-age");
+let nodemailer = require("nodemailer");
 
-var router = express.Router();
+let router = express.Router();
 
 router.get("/form", function (req, res, next) {
   if (req.session.loggedinUser) {
@@ -17,8 +17,8 @@ router.get("/form", function (req, res, next) {
   }
 });
 
-var rand = Math.floor(Math.random() * 10000 + 54);
-var transporter = nodemailer.createTransport({
+let rand = Math.floor(Math.random() * 10000 + 54);
+let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     // user: "election.blockchain@gmail.com",
@@ -27,11 +27,11 @@ var transporter = nodemailer.createTransport({
   },
 });
 
-var account_address;
-var data;
+let account_address;
+let data;
 
 router.post("/registerdata", function (req, res) {
-  var dob = [],
+  let dob = [],
     email,
     age,
     is_registerd;
@@ -58,7 +58,7 @@ router.post("/registerdata", function (req, res) {
       is_registerd = results[0].Is_registered;
       if (is_registerd != "YES") {
         if (age >= 18) {
-          var mailOptions = {
+          let mailOptions = {
             from: "election.blockchain@gmail.com",
             to: email,
             subject: "Please confirm your Email account",
@@ -86,22 +86,22 @@ router.post("/registerdata", function (req, res) {
 });
 
 router.post("/otpverify", (req, res) => {
-  var otp = req.body.otp;
+  let otp = req.body.otp;
   if (otp == rand) {
-    var record = { Account_address: account_address, Is_registered: "NO" };
-    var sql = "INSERT INTO registered_users SET ?";
+    let record = { Account_address: account_address, Is_registered: "NO" };
+    let sql = "INSERT INTO registered_users SET ?";
     conn.query(sql, record, function (err2, res2) {
       if (err2) {
         throw err2;
       } else {
-        var sql1 = "Update aadhar_info set Is_registered=? Where Aadhar_No=?";
-        var record1 = ["YES", data];
+        let sql1 = "Update aadhar_info set Is_registered=? Where Aadhar_No=?";
+        let record1 = ["YES", data];
         conn.query(sql1, record1, function (err1, res1) {
           if (err1) {
             res.render("voter-registration.ejs");
           } else {
             console.log("1 record updated");
-            var msg = "You are successfully registered";
+            let msg = "You are successfully registered";
             res.render("voter-registration.ejs", { alertMsg: msg });
           }
         });

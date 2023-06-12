@@ -1,8 +1,8 @@
 require('dotenv').config();
-var dbPass = process.env.DB_PASSWORD
+let dbPass = process.env.DB_PASSWORD
 
-var mysql = require('mysql2');
-var conn = mysql.createConnection({
+let mysql = require('mysql2');
+let conn = mysql.createConnection({
   host: 'localhost', // assign your host name
   user: 'root',      //  assign your database username
   password: dbPass,      // assign your database password
