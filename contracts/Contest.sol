@@ -65,15 +65,15 @@ contract Contest{
 		voters[msg.sender].vote=_contestantId;
 	}
 
-	function winnerContestent() public view validState(PHASE.done) returns (Contestant memory) {
-		Contestant memory winner;
+	function winnerContestent() public view validState(PHASE.done) returns (uint winnerId) {
+		uint id = 0;
 		uint maxVotes = 0;
 		for (uint i = 1; i <= contestantsCount; i++) {
 			if (contestants[i].voteCount > maxVotes) {
 				maxVotes = contestants[i].voteCount;
-				winner = contestants[i];
+				id = i;
 			}
 		}
-		return winner;
+		return id;
 	}
 }

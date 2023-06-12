@@ -79,7 +79,7 @@ DONE ** Logout -> no changes
 DONE ** if not admin , disable all admin functions (change wallet address)
 
 USER
-NOT DONE ** Result -> display the winner
+DONE ** Result -> display the winner
 DONE ** Information -> no change
 DONE ** Voter Registration -> disable register button in different phase
 DONE ** Logout -> no changes

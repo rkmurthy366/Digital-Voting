@@ -78,7 +78,7 @@ App = {
         contestantsResults.empty();
         let contestantsResultsAdmin = $("#contestantsResultsAdmin");
         contestantsResultsAdmin.empty();
-        
+
         for (let i = 1; i <= contestantsCount; i++) {
           let promise = contestInstance.contestants(i).then(function (contestant) {
             // console.log(contestant);
@@ -89,8 +89,8 @@ App = {
             let fetchedParty = contestant[3];
             let fetchedAge = contestant[4];
             let fetchedQualification = contestant[5];
-            
-            let contestantTemplate =`
+
+            let contestantTemplate = `
               <tr>
                 <th>${id}</th>
                 <td>${fetchedParty}</td>
@@ -130,7 +130,7 @@ App = {
       .then(function (voter) {
         let contestentId = `${voter[2]}`;
         // console.log(contestentId)
-        if(contestentId==0){
+        if (contestentId == 0) {
           // user dint vote
           let text = `You haven't voted yet`;
           $("#userVoted").html(text);
@@ -145,7 +145,7 @@ App = {
               $("[id^='voteBtn-']").prop("disabled", true);
             });
           })
-        }  
+        }
 
       })
       .catch(function (err) {
@@ -171,7 +171,7 @@ App = {
         } else if (state == 1) {
           fetchedState = "Voting is now live !!!";
           fetchedStateAdmin = "Voting";
-          $(document).ready(function() {
+          $(document).ready(function () {
             let buttons = $("[id^='voteBtn-']");
             buttons.text("New Text");
           });
@@ -209,7 +209,8 @@ App = {
         return instance.state();
       })
       .then(function (state) {
-        let result = $("#Results");
+        let Result = $("#Results");
+        let Winner = $("#Winner");
         if (state == 2) {
           $("#not").hide();
           contestInstance.contestantsCount().then(function (contestantsCount) {
@@ -231,9 +232,24 @@ App = {
                     <td>${voteCount}</td>
                   </tr> 
                 `;
-                result.append(resultTemplate);
+                Result.append(resultTemplate);
               });
             }
+            contestInstance.winnerContestent().then(function (winnerID) {
+              contestInstance.contestants(`${winnerID}`).then(function (contestant) {
+                let name = contestant[1];
+                let voteCount = contestant[2];
+                let fetchedParty = contestant[3];
+                let winnerTemplate = `
+                  <h3 style="font-size: 24px; font-weight: bold; color: #333; margin-bottom: 10px;">
+                  The winner is <span style="color: #009933;">${name}</span> 
+                  from <span style="color: #3366cc;">${fetchedParty}</span> 
+                  with <span style="color: #ff6600;">${voteCount}</span> votes.
+                  </h3>
+                `;
+                Winner.append(winnerTemplate);
+              })
+            })
           });
         } else {
           $("#renderTable").hide();
