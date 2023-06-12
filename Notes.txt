@@ -86,5 +86,5 @@ DONE ** Logout -> no changes
 DONE ** Voting Area -> lot many changes 
     DONE *** (later) make into table format, instead of this cards format
     DONE *** disable "CLICK HERE TO VOTE BUTTON" under different phases
-    NOT DONE *** during voting phase: disable vote button if user already voted
-    NOT DONE *** display to whom did the user vote
+    DONE *** during voting phase: disable vote button if user already voted
+    DONE *** display to whom did the user vote

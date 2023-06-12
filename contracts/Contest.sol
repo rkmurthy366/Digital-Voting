@@ -76,12 +76,4 @@ contract Contest{
 		}
 		return winner;
 	}
-
-	// function getVotedContestent() public view returns (Contestant memory) {
-	// 	require(voters[msg.sender].isRegistered, "voter not registered");
-    //     require(voters[msg.sender].hasVoted, "voter not voted");
-    //     require(state == PHASE.voting || state == PHASE.done, "Invalid state");
-	// 	uint contestantId = voters[msg.sender].vote;
-	// 	return contestants[contestantId];
-    // }
 }

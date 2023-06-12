@@ -81,7 +81,9 @@ App = {
         
         for (let i = 1; i <= contestantsCount; i++) {
           let promise = contestInstance.contestants(i).then(function (contestant) {
+            // console.log(contestant);
             let id = contestant[0];
+            // console.log(`${id}`);
             let name = contestant[1];
             let voteCount = contestant[2];
             let fetchedParty = contestant[3];
@@ -126,19 +128,22 @@ App = {
         return contestInstance.voters(App.account);
       })
       .then(function (voter) {
-        let contestentId = voter[2];
-        console.log(contestentId)
-        if(!contestentId){
+        let contestentId = `${voter[2]}`;
+        // console.log(contestentId)
+        if(contestentId==0){
           // user dint vote
-          let text = `User dint vote yet`;
+          let text = `You haven't voted yet`;
           $("#userVoted").html(text);
         } else {
           // user voted to getContestentVoted
           contestInstance.contestants(contestentId).then(function (contestant) {
             let name = contestant[1];
             let fetchedParty = contestant[3];
-            let text = `User already voted to ${name}, ${fetchedParty}`;
+            let text = `You have voted to ${name}, ${fetchedParty}`;
             $("#userVoted").html(text);
+            Promise.all(contestantsPromises).then(function () {
+              $("[id^='voteBtn-']").prop("disabled", true);
+            });
           })
         }  
 
@@ -159,6 +164,7 @@ App = {
           fetchedState = "Registration phase is LIVE, Please register yourself to vote !!";
           fetchedStateAdmin = "Registration";
           $("#regDone").hide();
+          $("#userVoted").hide();
           Promise.all(contestantsPromises).then(function () {
             $("[id^='voteBtn-']").prop("disabled", true);
           });
@@ -246,8 +252,8 @@ App = {
         return instance.vote(contestantId, { from: App.account });
       })
       .then(function (result) {
-        $("#loader").show();
         location.reload();
+        // $("#loader").show();
       })
       .catch(function (err) {
         console.error(err);
@@ -311,13 +317,14 @@ App = {
 
   // ------------- registering voter code -------------
   registerVoter: function () {
-    let add = $("#accadd").val();
+    let add = $("#voterAccAddr").val();
     $("#voterRegBtn").prop("disabled", true);
     App.contracts.Contest.deployed()
       .then(function (instance) {
         return instance.voterRegisteration(add, { from: App.account });
       })
       .then(function (result) {
+        $("#voterAccAddr").val("")
         $("#content").hide();
         $("#loader").show();
         $("#voterRegBtn").prop("disabled", false);
