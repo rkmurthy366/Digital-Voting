@@ -171,10 +171,6 @@ App = {
         } else if (state == 1) {
           fetchedState = "Voting is now live !!!";
           fetchedStateAdmin = "Voting";
-          $(document).ready(function () {
-            let buttons = $("[id^='voteBtn-']");
-            buttons.text("New Text");
-          });
           $("#addCandiBtn").prop("disabled", true);
           $("#voterPreRegBtn").prop("disabled", true);
           $("#voterRegBtn").prop("disabled", true);
@@ -333,11 +329,11 @@ App = {
 
   // ------------- registering voter code -------------
   registerVoter: function () {
-    let add = $("#voterAccAddr").val();
+    let accountAddr = $("#voterAccAddr").val();
     $("#voterRegBtn").prop("disabled", true);
     App.contracts.Contest.deployed()
       .then(function (instance) {
-        return instance.voterRegisteration(add, { from: App.account });
+        return instance.voterRegisteration(accountAddr, { from: App.account });
       })
       .then(function (result) {
         $("#voterAccAddr").val("")

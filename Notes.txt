@@ -1,6 +1,7 @@
 NOT using files
 vote_area.html
 voting.html
+first_page.ejs
 first_page.js
 user.js
 
@@ -61,6 +62,8 @@ x-----------------x-----------------x-----------------x-----------------x
 x-----------------x-----------------x-----------------x-----------------x
 
 OTHERS
+LATER ** rename all files properly
+LATER ** change variables name in SC
 NOT DONE ** password SHA
 DONE ** Remove Browsersync pop-up
 DONE ** password length < 8, notify them
@@ -69,8 +72,8 @@ DONE ** .env file
 DONE ** git setup
 
 ADMIN
+SKIP ** Register -> change state to YES after successful registration
 NOT DONE ** Register -> go for a script registration which registers all users in one click
-NOT DONE ** Register -> change state to YES after successful registration
 DONE ** Candidate details -> stop showing votes 
 DONE ** add Candidate -> disable button in different phase
 DONE ** Register -> disable button in different phase

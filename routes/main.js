@@ -88,7 +88,7 @@ router.post("/registerdata", function (req, res) {
 router.post("/otpverify", (req, res) => {
   let otp = req.body.otp;
   if (otp == rand) {
-    let record = { Account_address: account_address, Is_registered: "NO" };
+    let record = { Account_address: account_address, Is_registered: "YES" };
     let sql = "INSERT INTO registered_users SET ?";
     conn.query(sql, record, function (err2, res2) {
       if (err2) {
