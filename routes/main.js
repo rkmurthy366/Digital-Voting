@@ -1,6 +1,6 @@
-require('dotenv').config();
-let musername = process.env.MAIL_USERNAME
-let mpass = process.env.MAIL_PASSWORD
+require("dotenv").config();
+let musername = process.env.MAIL_USERNAME;
+let mpass = process.env.MAIL_PASSWORD;
 
 let express = require("express");
 let conn = require("../database");
@@ -35,7 +35,7 @@ router.post("/registerdata", function (req, res) {
     email,
     age,
     is_registerd;
-  aadharno = req.body.aadharno; 
+  aadharno = req.body.aadharno;
   account_address = req.body.account_address; //stores metamask acc address
   let sql = "SELECT * FROM aadhar_info WHERE Aadhar_No = ?";
   conn.query(sql, aadharno, (error, results, fields) => {
@@ -44,13 +44,12 @@ router.post("/registerdata", function (req, res) {
       return console.error(error.message);
     }
 
-    if (results.length < 1){
+    if (results.length < 1) {
       console.log("Invalid user", results);
       res.render("voter-registration.ejs", {
         alertMsg: "Invalid user",
       });
-    }
-    else {
+    } else {
       email = results[0].Email;
       dob = results[0].Dob;
       age = getAge(dob);
