@@ -35,28 +35,24 @@ card-header-warinig -> orange
 card-header-danger -> red
 card-header-rose -> maroon
 
-/adlogin -> admin_login.js -> admin_login.ejs
-/register -> registration-route.js -> registration-form.ejs
-/login -> login-route.js -> login-form.ejs
-/logout -> logout-route.js
-/table_view -> table_view.js -> adminVoterReg.ejs            
-/dashboard -> dashboard-route.js -> dashboard.ejs
-/form -> main.js -> voter-registration.ejs
-                 -> emailverify.ejs
+/adminLogin -> adminLogin.js -> adminLogin.ejs
+/login -> loginRoute.js -> loginForm.ejs
+/logout -> logoutRoute.js
+/register -> registrationRoute.js -> registrationForm.ejs -> verifyEmail.ejs
 
 ADMIN
-Candidate details -> adminCandidateDetails.html (/candidateDetails)
-Add Candidate -> adminAddCandidate.html (/addCandidate)
-Register -> adminVoterReg.ejs -> table_view.js (/table_view)
-Change Phase -> adminChangePhase.html (/changePhase)
-Result -> adminResult.html (/resultAdmin)
+Candidate details -> adminCandidateDetails.html -> adminCandidateDetailsRoute.js (/candidateDetails)
+Add Candidate -> adminAddCandidate.html -> adminAddCandidateRoute.js (/addCandidate)
+Register -> adminVoterReg.ejs -> adminVoterRegRoute.js (/adminVoterReg)
+Change Phase -> adminChangePhase.html -> adminChangePhaseRoute.js(/changePhase)
+Result -> adminResult.html -> adminResultRoute.js (/resultAdmin)
 Logout -> (/logout)
 
 USER
-Information -> userInfo.html (/userInfo)
-Voter Registration -> voter-registration.ejs -> main.js (/form)
-Voting Area -> dashboard.ejs -> dashboard-route.js (/dashboard)
-Result -> result.html (/result)
+Information -> userInfo.html -> userInfoRoute.js (/userInfo)
+Voter Registration -> userVotingRegistration.ejs -> userVotingRegRoute.js (/votingReg)
+Voting Area -> userVoting.ejs -> userVotingRoute.js (/voting)
+Result -> userResult.ejs -> userResultRoute.js (/result)
 Logout -> (/logout)
 
 x-----------------x-----------------x-----------------x-----------------x
@@ -67,6 +63,7 @@ OTHERS
 LATER ** rename all files properly
 LATER ** change variables name in SC
 NOT DONE ** password SHA
+DONE ** Add sessions and routes for all admin pages and few user pages
 DONE ** OTP Based user sign-up
 DONE ** Remove Browsersync pop-up
 DONE ** password length < 8, notify them

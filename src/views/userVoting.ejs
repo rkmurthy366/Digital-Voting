@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
-  <title>Results</title>
+  <title>Voting Area</title>
 
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
   <!--     Fonts and icons     -->
@@ -21,7 +21,7 @@
 <body>
   <!-- additional -->
   <div class="wrapper">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+    <div class="sidebar" data-color="azure" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
       <!--
             Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
     
@@ -30,31 +30,25 @@
       <div class="sidebar-wrapper">
         <ul class="nav" style="margin-top: 50px">
           <li class="nav-item">
-            <a class="nav-link" href="/candidateDetails">
-              <i class="material-icons">info</i>
-              <p>Candidate Details</p>
+            <a class="nav-link" href="/userInfo">
+              <i class="material-icons">content_paste</i>
+              <p>Information</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/addCandidate">
-              <i class="material-icons">person_add</i>
-              <p>Add Candidate</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/table_view">
-              <i class="material-icons">how_to_reg</i>
-              <p>Register</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/changePhase">
-              <i class="material-icons">published_with_changes</i>
-              <p>Change Phase</p>
+            <a class="nav-link" href="/votingReg">
+              <i class="material-icons">check_box</i>
+              <p>Voter Registeration</p>
             </a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="#">
+              <i class="material-icons">how_to_vote</i>
+              <p>Voting-Area</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/result">
               <i class="material-icons">assessment</i>
               <p>Result</p>
             </a>
@@ -73,7 +67,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Results</a>
+            <a class="navbar-brand" href="javascript:;">Voting Area</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -84,31 +78,32 @@
           </button>
         </div>
       </nav>
+
       <div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-success">
-                  <h4 class="card-title">Results</h4>
+                  <h4 class="card-title">Voting Area</h4>
                 </div>
                 <div class="card-body">
-                  <div id="not">
-                    <h2>Election is Not Over Yet!!!!!</h2>
-                  </div>
-                  <div id="Winner"></div>
-                  <div id="renderTable">
+                  <div id="currentPhase"></div>
+                  <h3 id="userVoted"></h3>
+                  <div>
+                    <hr />
+                    <p id="accountAddress" class="text-center"></p>
                     <table class="table" style="text-align: center;">
                       <thead>
                         <tr>
                           <th scope="col">Serial Num</th>
+                          <th scope="col">Party</th>
                           <th scope="col">Name</th>
                           <th scope="col">Age</th>
-                          <th scope="col">Party</th>
-                          <th scope="col">Votes</th>
+                          <th scope="col">Vote</th>
                         </tr>
                       </thead>
-                      <tbody id="Results"></tbody>
+                      <tbody id="votingCenter"></tbody>
                     </table>
                   </div>
                 </div>
@@ -117,6 +112,7 @@
           </div>
         </div>
       </div>
+
       <!-- End Navbar -->
     </div>
   </div>

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
-  <title>Admin Candidate</title>
+  <title>Change Phase</title>
 
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
   <!--     Fonts and icons     -->
@@ -24,7 +24,6 @@
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
       <!--
           Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-  
           Tip 2: you can also add an image using data-image tag
       -->
       <div class="sidebar-wrapper">
@@ -35,22 +34,22 @@
               <p>Candidate Details</p>
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
+          <li class="nav-item">
+            <a class="nav-link" href="/addCandidate">
               <i class="material-icons">person_add</i>
               <p>Add Candidate</p>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/table_view">
+            <a class="nav-link" href="/adminVoterReg">
               <i class="material-icons">how_to_reg</i>
               <p>Register</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/changePhase">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">
               <i class="material-icons">published_with_changes</i>
-              <p>Change State</p>
+              <p>Change Phase</p>
             </a>
           </li>
           <li class="nav-item">
@@ -73,7 +72,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Add Candidate</a>
+            <a class="navbar-brand" href="javascript:;">Change Phase</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -86,69 +85,24 @@
       </nav>
 
       <div class="content">
-        <div class="container" style="width: 800px">
+        <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-warning">
-                  <h4 class="card-title">Add Candidate Information</h4>
+                  <h4 class="card-title">CHANGE PHASE</h4>
                 </div>
                 <div class="card-body">
-                  <!-- form  -->
-                  <h3 id="adminControl">
-                    You account is not Admin
-                  </h3>
-                  <div id="regDone">
-                    <h3>
-                      Registration Phase Done!! <br />
-                      You cannot register now
+                  <div class="alert">
+                    <span id="currentPhaseAdmin"> </span>
+                    <h3 id="adminControl">
+                      You account is not Admin
                     </h3>
                   </div>
-                  <form onsubmit="App.addCandidate(); return false;">
-                    <!-- 2 column grid layout with text inputs for the first and last names -->
-                    <div class="row mb-4">
-                      <div class="col">
-                        <div class="form-outline">
-                          <input type="text" id="name" class="form-control" required />
-                          <label class="form-label" for="form3Example1">Name</label>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="form-outline">
-                          <input type="text" id="party" class="form-control" required />
-                          <label class="form-label" for="form3Example2">Party</label>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Checkbox -->
-                    <div class="row mb-4">
-                      <div class="col">
-                        <div class="form-outline">
-                          <input type="number" min="0" max="100" id="age" class="form-control" required />
-                          <label class="form-label" for="form3Example1">Age</label>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="form-outline">
-                          <input type="text" id="qualification" class="form-control" required />
-                          <label class="form-label" for="form3Example2">Qualification</label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Submit button -->
-                    <button type="submit" id="addCandiBtn" class="btn btn-warning btn-block mb-4">
-                      Add
-                    </button>
-                  </form>
+                  <button type="submit" id="changePhaseBtn" class="btn btn-warning" onclick="App.changeState()">
+                    Change Phase
+                  </button>
                 </div>
-              </div>
-              <div class="alert alert-success" id="loader">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <i class="material-icons">close</i>
-                </button>
-                <span>
-                  <b> Candidate </b> has been added Successfully....!</span>
               </div>
             </div>
           </div>

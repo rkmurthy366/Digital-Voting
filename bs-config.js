@@ -23,38 +23,50 @@ app.use(
   })
 );
 
-let registrationRouter = require("./routes/registration-route");
-let loginRouter = require("./routes/login-route");
-let logoutRouter = require("./routes/logout-route");
-let adminLogin = require("./routes/admin_login");
-let dashboardRouter = require("./routes/dashboard-route");
-let registerRouter = require("./routes/main");
-let tableview = require("./routes/table_view");
+let registrationRouter = require("./routes/registrationRoute");
+let loginRouter = require("./routes/loginRoute");
+let logoutRouter = require("./routes/logoutRoute");
+let adminLogin = require("./routes/adminLoginRoute");
+let userInfoRoute = require("./routes/userInfoRoute");
+let userVotingRegRoute = require("./routes/userVotingRegRoute");
+let userVotingRoute = require("./routes/userVotingRoute");
+let userResultRoute = require("./routes/userResultRoute");
+let adminCandidateDetailsRoute = require("./routes/adminCandidateDetailsRoute");
+let adminAddCandidateRoute = require("./routes/adminAddCandidateRoute");
+let adminVoterRegRoute = require("./routes/adminVoterRegRoute");
+let adminChangePhaseRoute = require("./routes/adminChangePhaseRoute");
+let adminResultRoute = require("./routes/adminResultRoute");
 
 app.use("/", registrationRouter);
 app.use("/", loginRouter);
 app.use("/", logoutRouter);
 app.use("/", adminLogin);
-app.use("/", dashboardRouter);
-app.use("/", registerRouter);
-app.use("/", tableview);
+app.use("/", userInfoRoute);
+app.use("/", userVotingRegRoute);
+app.use("/", userVotingRoute);
+app.use("/", userResultRoute);
+app.use("/", adminCandidateDetailsRoute);
+app.use("/", adminAddCandidateRoute);
+app.use("/", adminVoterRegRoute);
+app.use("/", adminChangePhaseRoute);
+app.use("/", adminResultRoute);
 
 // web-portion --------------------------------->
-app.get("/candidateDetails", function (req, res) {
-  res.sendFile(__dirname + "/src/adminCandidateDetails.html");
-});
+// app.get("/candidateDetails", function (req, res) {
+//   res.sendFile(__dirname + "/src/adminCandidateDetails.html");
+// });
 
-app.get("/addCandidate", function (req, res) {
-  res.sendFile(__dirname + "/src/adminAddCandidate.html");
-});
+// app.get("/addCandidate", function (req, res) {
+//   res.sendFile(__dirname + "/src/adminAddCandidate.html");
+// });
 
-app.get("/changePhase", function (req, res) {
-  res.sendFile(__dirname + "/src/adminChangePhase.html");
-});
+// app.get("/changePhase", function (req, res) {
+//   res.sendFile(__dirname + "/src/adminChangePhase.html");
+// });
 
-app.get("/resultAdmin", function (req, res) {
-  res.sendFile(__dirname + "/src/adminResult.html");
-});
+// app.get("/resultAdmin", function (req, res) {
+//   res.sendFile(__dirname + "/src/adminResult.html");
+// });
 
 app.get("/userInfo", function (req, res) {
   res.sendFile(__dirname + "/src/userInfo.html");
