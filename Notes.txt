@@ -1,10 +1,3 @@
-NOT using files
-vote_area.html
-voting.html
-first_page.ejs
-first_page.js
-user.js
-
 x-----------------x-----------------x-----------------x-----------------x
 x-----------------x-----------------x-----------------x-----------------x
 x-----------------x-----------------x-----------------x-----------------x
@@ -60,8 +53,8 @@ x-----------------x-----------------x-----------------x-----------------x
 x-----------------x-----------------x-----------------x-----------------x
 
 OTHERS
-LATER ** rename all files properly
 LATER ** change variables name in SC
+Done ** rename all files properly
 NOT DONE ** password SHA
 DONE ** Add sessions and routes for all admin pages and few user pages
 DONE ** OTP Based user sign-up
