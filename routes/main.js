@@ -28,18 +28,17 @@ let transporter = nodemailer.createTransport({
 });
 
 let account_address;
-let data;
+let aadharno;
 
 router.post("/registerdata", function (req, res) {
   let dob = [],
     email,
     age,
     is_registerd;
-  data = req.body.aadharno; //data stores aadhar no
-  // console.log(data);
+  aadharno = req.body.aadharno; 
   account_address = req.body.account_address; //stores metamask acc address
   let sql = "SELECT * FROM aadhar_info WHERE Aadhar_No = ?";
-  conn.query(sql, data, (error, results, fields) => {
+  conn.query(sql, aadharno, (error, results, fields) => {
     console.log("results", results);
     if (error) {
       return console.error(error.message);
@@ -61,7 +60,7 @@ router.post("/registerdata", function (req, res) {
           let mailOptions = {
             from: "election.blockchain@gmail.com",
             to: email,
-            subject: "Please confirm your Email account",
+            subject: "User Verification",
             text: "Hello, Your otp is " + rand,
           };
           transporter.sendMail(mailOptions, function (error, info) {
@@ -71,7 +70,7 @@ router.post("/registerdata", function (req, res) {
               console.log("Email sent: " + info.response);
             }
           });
-          res.render("emailverify.ejs");
+          res.render("verifyUser.ejs");
         } else {
           res.send("You cannot vote as your age is less than 18");
         }
@@ -85,7 +84,7 @@ router.post("/registerdata", function (req, res) {
   });
 });
 
-router.post("/otpverify", (req, res) => {
+router.post("/verifyUser  ", (req, res) => {
   let otp = req.body.otp;
   if (otp == rand) {
     let record = { Account_address: account_address, Is_registered: "YES" };
@@ -94,9 +93,9 @@ router.post("/otpverify", (req, res) => {
       if (err2) {
         throw err2;
       } else {
-        let sql1 = "Update aadhar_info set Is_registered=? Where Aadhar_No=?";
-        let record1 = ["YES", data];
-        conn.query(sql1, record1, function (err1, res1) {
+        sql = "Update aadhar_info set Is_registered=? Where Aadhar_No=?";
+        record = ["YES", aadharno];
+        conn.query(sql, record, function (err1, res1) {
           if (err1) {
             res.render("voter-registration.ejs");
           } else {

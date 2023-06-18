@@ -39,23 +39,25 @@ card-header-rose -> maroon
 /register -> registration-route.js -> registration-form.ejs
 /login -> login-route.js -> login-form.ejs
 /logout -> logout-route.js
+/table_view -> table_view.js -> adminVoterReg.ejs            
+/dashboard -> dashboard-route.js -> dashboard.ejs
 /form -> main.js -> voter-registration.ejs
                  -> emailverify.ejs
 
 ADMIN
-Candidate details -> adminCandidateDetails.html
-Add Candidate -> adminAddCandidate.html
+Candidate details -> adminCandidateDetails.html (/candidateDetails)
+Add Candidate -> adminAddCandidate.html (/addCandidate)
 Register -> adminVoterReg.ejs -> table_view.js (/table_view)
-Change Phase -> adminChangePhase.html
-Result -> adminResult.html
-Logout -> /logout
+Change Phase -> adminChangePhase.html (/changePhase)
+Result -> adminResult.html (/resultAdmin)
+Logout -> (/logout)
 
 USER
-Information -> userInfo.html
+Information -> userInfo.html (/userInfo)
 Voter Registration -> voter-registration.ejs -> main.js (/form)
 Voting Area -> dashboard.ejs -> dashboard-route.js (/dashboard)
-Result -> result.html
-Logout -> /logout
+Result -> result.html (/result)
+Logout -> (/logout)
 
 x-----------------x-----------------x-----------------x-----------------x
 x-----------------x-----------------x-----------------x-----------------x
@@ -65,6 +67,7 @@ OTHERS
 LATER ** rename all files properly
 LATER ** change variables name in SC
 NOT DONE ** password SHA
+DONE ** OTP Based user sign-up
 DONE ** Remove Browsersync pop-up
 DONE ** password length < 8, notify them
 DONE ** if passwords din't match during registration, notify them
@@ -72,8 +75,8 @@ DONE ** .env file
 DONE ** git setup
 
 ADMIN
+SKIP ** Register -> go for a script registration which registers all users in one click
 SKIP ** Register -> change state to YES after successful registration
-NOT DONE ** Register -> go for a script registration which registers all users in one click
 DONE ** Candidate details -> stop showing votes 
 DONE ** add Candidate -> disable button in different phase
 DONE ** Register -> disable button in different phase
@@ -82,6 +85,8 @@ DONE ** Logout -> no changes
 DONE ** if not admin , disable all admin functions (change wallet address)
 
 USER
+SKIP ** User -> Add account_address into registration table once user registers their address to vote
+SKIP ** User -> if its different account_address which isn't registered notify it
 DONE ** Result -> display the winner
 DONE ** Information -> no change
 DONE ** Voter Registration -> disable register button in different phase
