@@ -30,7 +30,7 @@ CREATE TABLE `aadhar_info` (
   `Dob` date NOT NULL,
   `Is_registered` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,6 @@ CREATE TABLE `aadhar_info` (
 
 LOCK TABLES `aadhar_info` WRITE;
 /*!40000 ALTER TABLE `aadhar_info` DISABLE KEYS */;
-INSERT INTO `aadhar_info` VALUES (3,'18001234','Radha Krishna','rk@gmail.com','2001-01-16','YES'),(4,'18004321','Doe John','doejohn@gmail.com','1995-09-19',NULL),(5,'18009991','Suyash','suyash.g.patil@gmail.com','2001-11-24','YES');
 /*!40000 ALTER TABLE `aadhar_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,8 +80,9 @@ CREATE TABLE `registered_users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `Account_address` varchar(255) NOT NULL,
   `Is_registered` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Account_address_UNIQUE` (`Account_address`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,6 @@ CREATE TABLE `registered_users` (
 
 LOCK TABLES `registered_users` WRITE;
 /*!40000 ALTER TABLE `registered_users` DISABLE KEYS */;
-INSERT INTO `registered_users` VALUES (1,'1800123443210081','Yes'),(2,'1800999118009991','Yes');
 /*!40000 ALTER TABLE `registered_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +108,7 @@ CREATE TABLE `registration` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_address_UNIQUE` (`email_address`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +117,7 @@ CREATE TABLE `registration` (
 
 LOCK TABLES `registration` WRITE;
 /*!40000 ALTER TABLE `registration` DISABLE KEYS */;
-INSERT INTO `registration` VALUES (42,'RK','rk@gmail.com','rk'),(43,'Others','others@gmail.com','123'),(44,'suyash','suyash@gmail.com','123');
+INSERT INTO `registration` VALUES (1,'Test User','user@user.com','616104ebd93e67ae20bac90c86483da3cae1ee5b1c1483f739372a88ff1e79f9');
 /*!40000 ALTER TABLE `registration` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -131,4 +130,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-29 11:13:50
+-- Dump completed on 2023-06-19 17:51:55
