@@ -4,6 +4,8 @@
 
     npm start
 
+## Credentials
+
 ### Admin Credentials
 
 `username`: `admin@admin.com`  
@@ -29,6 +31,8 @@ Global install truffle, and install all project dependencies
 [Download Ganache](https://trufflesuite.com/ganache/)  
 [Download MetaMask](https://metamask.io/)
 
+### Compiling & Deploying Contracts
+
 Open Ganache -> New Workspace -> add project -> select `truffle-config.js` from the project folder.
 
 Compile the smart contract and migrate it.
@@ -36,14 +40,16 @@ Compile the smart contract and migrate it.
     truffle compile
     truffle migrate
   
-  To re-deploy the same contract
+To re-deploy the same contract
 
     truffle migrate --reset
+
+### MetaMask setup
 
 Copy the `MNEMONIC` string from Ganache and paste at the `Secret Recovery Phrase` in MetaMask
 
 Go to metamask settings -> network -> Add a network manually  
-`RPC`       : `http://127.0.0.1:7545`  
+`RPC`: `http://127.0.0.1:7545`  
 `Chain Id`  : `1337`  
 `Symbol`    : `ETH`
 
@@ -53,9 +59,9 @@ Go to metamask settings -> network -> Add a network manually
 Make a database with name `aadhar`  
 Import the `aadhar.sql` file to this database
 
-## .env file
+## .env
 
-rename `env.env` to `.env` and fill the details  
+Rename `env.env` to `.env` and fill the details  
 `DB_PASSWORD` = MySQL password  
 `MAIL_USERNAME` = Gmail username  
 `MAIL_PASSWORD` = App password  
