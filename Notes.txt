@@ -55,7 +55,7 @@ x-----------------x-----------------x-----------------x-----------------x
 OTHERS
 LATER ** change variables name in SC
 Done ** rename all files properly
-NOT DONE ** password SHA
+DONE ** password SHA
 DONE ** Add sessions and routes for all admin pages and few user pages
 DONE ** OTP Based user sign-up
 DONE ** Remove Browsersync pop-up
