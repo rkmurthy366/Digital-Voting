@@ -1,6 +1,7 @@
 require("dotenv").config();
 let musername = process.env.MAIL_USERNAME;
 let mpass = process.env.MAIL_PASSWORD;
+const crypto = require('crypto')
 let nodemailer = require("nodemailer");
 let express = require("express");
 let router = express.Router();
@@ -20,6 +21,9 @@ let transporter = nodemailer.createTransport({
     pass: mpass,
   },
 });
+const hashPassword = password => {
+  return crypto.createHash('sha256').update(password).digest('hex')
+}
 
 // to display registration form
 router.get("/register", function (req, res, next) {
@@ -50,7 +54,6 @@ router.post("/register", function (req, res, next) {
       let msg = "Your password must be at least 8 characters";
       res.render("registrationForm.ejs", { alertMsg: msg });
     } else {
-      console.log("mailoptions")
       let mailOptions = {
         from: "election.blockchain@gmail.com",
         to: inputData.email_address,
@@ -73,11 +76,13 @@ router.post("/verifyEmailOTP", (req, res) => {
   let otp = req.body.otp;
   if (otp == rand) {
     // save users data into database
+    const password = hashPassword(inputData.password)
+    // console.log(inputData.password," ", password); 
     let sql = "INSERT INTO registration SET ?";
     const mdata = {
       first_name: inputData.first_name,
       email_address: inputData.email_address,
-      password: inputData.password,
+      password: password,
     };
     db.query(sql, mdata, function (err, data) {
       if (err) console.log(err);
