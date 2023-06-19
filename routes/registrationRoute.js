@@ -55,7 +55,7 @@ router.post("/register", function (req, res, next) {
       res.render("registrationForm.ejs", { alertMsg: msg });
     } else {
       let mailOptions = {
-        from: "election.blockchain@gmail.com",
+        // from: "election.blockchain@gmail.com",
         to: inputData.email_address,
         subject: "Please confirm your Email account",
         text: "Hello, Your otp is " + rand,
