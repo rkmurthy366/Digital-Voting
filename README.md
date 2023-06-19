@@ -1,8 +1,7 @@
 # Digital-Voting
 
 ## Start the server
-
-    npm start
+`npm start`
 
 ## Credentials
 
@@ -49,6 +48,7 @@ To re-deploy the same contract
 Copy the `MNEMONIC` string from Ganache and paste at the `Secret Recovery Phrase` in MetaMask
 
 Go to metamask settings -> network -> Add a network manually  
+
 `RPC`: `http://127.0.0.1:7545`  
 `Chain Id`  : `1337`  
 `Symbol`    : `ETH`
@@ -56,6 +56,7 @@ Go to metamask settings -> network -> Add a network manually
 ## MySQL Database
 
 [Download MySQL](https://dev.mysql.com/downloads/windows/installer/8.0.html)
+
 Make a database with name `aadhar`  
 Import the `aadhar.sql` file to this database
 
