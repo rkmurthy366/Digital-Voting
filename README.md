@@ -55,7 +55,7 @@ Go to metamask settings -> network -> Add a network manually
 
 ## MySQL Database
 
-[Download MySQL](https://dev.mysql.com/downloads/windows/installer/8.0.html)
+[Download MySQL](https://dev.mysql.com/downloads/windows/installer/8.0.html)  
 
 Make a database with name `aadhar`  
 Import the `aadhar.sql` file to this database
@@ -66,4 +66,5 @@ Rename `env.env` to `.env` and fill the details
 `DB_PASSWORD` = MySQL password  
 `MAIL_USERNAME` = Gmail username  
 `MAIL_PASSWORD` = App password  
+
 [Sign in with app passwords](https://support.google.com/accounts/answer/185833?hl=en)
