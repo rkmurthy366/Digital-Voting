@@ -72,9 +72,9 @@ app.use("/", adminResultRoute);
 //   res.sendFile(__dirname + "/src/userInfo.html");
 // });
 
-app.get("/result", function (req, res) {
-  res.sendFile(__dirname + "/src/result.html");
-});
+// app.get("/result", function (req, res) {
+//   res.sendFile(__dirname + "/src/result.html");
+// });
 
 module.exports = {
   notify: false,

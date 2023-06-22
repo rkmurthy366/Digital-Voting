@@ -12,7 +12,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use("/css", express.static(__dirname + "public/css"));
 
-let rand = Math.floor(Math.random() * 1000000 + 3454);
+let rand = Math.floor(Math.random() * 1000000 + 345498);
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {

@@ -17,7 +17,7 @@ router.get("/votingReg", function (req, res, next) {
   }
 });
 
-let rand = Math.floor(Math.random() * 10000 + 54);
+let rand = Math.floor(Math.random() * 1000000 + 345498);
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -30,7 +30,7 @@ let transporter = nodemailer.createTransport({
 let account_address;
 let aadharno;
 
-router.post("/registerdata", function (req, res) {
+router.post("/votingReg", function (req, res) {
   let dob = [],
     email,
     age,
@@ -83,7 +83,7 @@ router.post("/registerdata", function (req, res) {
   });
 });
 
-router.post("/verifyUser  ", (req, res) => {
+router.post("/verifyUserOTP", (req, res) => {
   let otp = req.body.otp;
   if (otp == rand) {
     let record = { Account_address: account_address, Is_registered: "YES" };
